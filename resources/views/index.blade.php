@@ -1,0 +1,1 @@
+<h3>Index Page {{ $title }}</h3>
