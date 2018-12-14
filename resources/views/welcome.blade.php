@@ -76,9 +76,6 @@
                     @endauth
                 </div>
             @endif
-
-
-                <iframe width="430" height="242" src="https://www.youtube.com/embed/njVEYVAnMUw" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
             
             <div class="content">
                 <div class="title m-b-md">
@@ -87,7 +84,7 @@
 
                 <div class="links">
                     <a href="https://laravel.com/docs">Documentation</a>
-                    <a href="https://laracasts.com">Laracasts</a>
+                    <a href="http://localhost:8000/listings">Listings</a>
                     <a href="https://laravel-news.com">News</a>
                     <a href="https://nova.laravel.com">Nova</a>
                     <a href="https://forge.laravel.com">Forge</a>

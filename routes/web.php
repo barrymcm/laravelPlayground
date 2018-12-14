@@ -16,17 +16,26 @@ Route::get('/', function () {
 });
 
 Route::get('/home', function () {
-    return 'This is Home';
+    return view('home');
 });
 
 Route::get('/about', function () {
-    return 'This is about';
+    return view('about');
 });
 
 Route::get('/contact', function () {
-    return 'This is contact';
+    return view('contact');
 });
 
 Route::get('/index', 'PracticeController@indexAction');
 
+Route::get('/messages', 'MessagesController@read');
+Route::post('/message/create', 'MessagesController@create');
 
+
+
+Auth::routes();
+Route::get('/dashboard', 'DashboardController@index');
+Route::resource('listings', 'ListingsController');
+
+Route::resource('albums', 'AlbumsController');
