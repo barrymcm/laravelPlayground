@@ -39,3 +39,5 @@ Route::get('/dashboard', 'DashboardController@index');
 Route::resource('listings', 'ListingsController');
 
 Route::resource('albums', 'AlbumsController');
+Route::resource('photos', 'PhotosController');
+Route::get('/photos/create/{id}', 'PhotosController@create');

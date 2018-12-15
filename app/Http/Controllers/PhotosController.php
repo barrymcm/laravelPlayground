@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Album;
+use App\Photo;
 use Illuminate\Http\Request;
 
 class PhotosController extends Controller
@@ -21,9 +23,9 @@ class PhotosController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($albumId)
     {
-        //
+        return view('photos.create', ['albumId' => $albumId]);
     }
 
     /**

@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Album;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class AlbumsController extends Controller
@@ -69,7 +68,9 @@ class AlbumsController extends Controller
      */
     public function show($id)
     {
-        return view('albums.show')
+        $album = Album::with('Photos')->find($id);
+
+        return view('albums.show', ['album' => $album]);
     }
 
     /**
