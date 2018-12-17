@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Album;
+use Illuminate\Session;
 use App\Photo;
 use Illuminate\Http\Request;
 
@@ -36,7 +36,29 @@ class PhotosController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'title' => 'required',
+            'photo' => 'image|max:1999'
+        ]);
+
+        $photoImage = $request->file('photo')->getClientOriginalName();
+        $albumId = $request->input('album_id');
+
+        $file = pathinfo($photoImage, PATHINFO_FILENAME);
+        $fileExtension = $request->file('photo')->getClientOriginalExtension();
+        $fileName = $file . '_'. substr(sha1(rand()), 0, 8). '.' . $fileExtension;
+
+        $request->file('photo')->storeAs('public/album/'.$albumId, $fileName);
+
+        $photo = new Photo;
+        $photo->album_id = $albumId;
+        $photo->photo = $fileName;
+        $photo->title = $request->input('title');
+        $photo->size = $request->file('photo')->getSize();
+        $photo->description = $request->input('description');
+        $photo->save();
+
+        return redirect('/albums/'.$albumId)->with('success', 'New photo was saved');
     }
 
     /**
@@ -47,7 +69,9 @@ class PhotosController extends Controller
      */
     public function show($id)
     {
-        //
+       $photo = Photo::find($id);
+
+       return view('photos.show', ['photo' => $photo]);
     }
 
     /**
@@ -79,8 +103,11 @@ class PhotosController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        //
+        Photo::destroy($request->input('id'));
+
+        Session::flash('success', 'The photo was deleted');
+        return redirect('/albums/'.$request->input('album_id'))->with('success', 'Photo was deleted');
     }
 }

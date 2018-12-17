@@ -10,16 +10,19 @@
                     <a class="btn btn-primary float-right" href="/photos/create/{{ $album->id }}">Upload Photo</a>
                 </th>
                 <th>
-                    <a class="btn btn-outline-secondary float-right" href="">back</a>
+                    <a class="btn btn-outline-secondary float-right" href="/albums">back</a>
                 </th>
             </tr>
-            {{--@foreach($album as $album)--}}
-            {{--<tr>--}}
-            {{--<td>--}}
-            {{--<img class="img-thumbnail" src="storage/album_covers/{{ $album->cover_image }}" alt="{{ $album->name }}">--}}
-                    {{--</td>--}}
-                {{--</tr>--}}
-            {{--@endforeach--}}
+            @foreach($album->photos as $photo)
+                <tr>
+                    <td>
+                        <a href="/photos/{{$photo->id}}">
+                            <img class="img-thumbnail" src="/storage/album/{{ $album->id}}/{{ $photo->photo }}"
+                             alt="{{ $photo->name }}">
+                        </a>
+                    </td>
+                </tr>
+            @endforeach
         </table>
     </div>
 @endsection()
