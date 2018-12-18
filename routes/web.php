@@ -32,9 +32,8 @@ Route::get('/index', 'PracticeController@indexAction');
 Route::get('/messages', 'MessagesController@read');
 Route::post('/message/create', 'MessagesController@create');
 
-
-
 Auth::routes();
+
 Route::get('/dashboard', 'DashboardController@index');
 Route::resource('listings', 'ListingsController');
 

@@ -85,6 +85,7 @@
                 <div class="links">
                     <a href="https://laravel.com/docs">Documentation</a>
                     <a href="http://localhost:8000/listings">Listings</a>
+                    <a href="http://localhost:8000/albums">Albums</a>
                     <a href="https://laravel-news.com">News</a>
                     <a href="https://nova.laravel.com">Nova</a>
                     <a href="https://forge.laravel.com">Forge</a>

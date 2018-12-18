@@ -2,12 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Session;
 use App\Photo;
 use Illuminate\Http\Request;
 
 class PhotosController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth', ['create']);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -106,8 +110,9 @@ class PhotosController extends Controller
     public function destroy(Request $request)
     {
         Photo::destroy($request->input('id'));
+        $albumId = $request->input('album_id');
 
-        Session::flash('success', 'The photo was deleted');
-        return redirect('/albums/'.$request->input('album_id'))->with('success', 'Photo was deleted');
+        session()->flash('success', 'Photo was deleted');
+        return redirect("/albums/$albumId");
     }
 }
