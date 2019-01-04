@@ -9,6 +9,15 @@
                         <span class="float-right"><a href="{{ route('users.index') }}" class="btn btn-outline-secondary">Back</a></span>
                     </div>
                     <div class="card-body">
+                        @if ($errors->any())
+                            <div class="alert alert-danger">
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
                         <div class="panel-body">
                             {!! Form::open(['route' => ['users.store'], 'method' => 'POST']) !!}
                                 {{ Form::bsText('name', '', ['placeholder' => 'User Name']) }}
@@ -18,11 +27,17 @@
                                 {{ Form::label('User') }}
                                 {{ Form::radio('admin', '0', true) }}
                                 <div class="form-group">
-                                    {{ Form::password('password', ['class' => 'form-control', 'placeholder' => 'Password']) }}
+                                    {{ Form::password('password', [
+                                        'class' => 'form-control',
+                                        'placeholder' => 'Password',
+                                        'required']) }}
                                 </div>
 
                                 <div class="form-group">
-                                    {{ Form::password('password_confirmation', ['class' => 'form-control', 'placeholder' => 'Confirm Password']) }}
+                                    {{ Form::password('password_confirmation', [
+                                        'class' => 'form-control',
+                                        'placeholder' => 'Confirm Password',
+                                        'required']) }}
                                 </div>
                                 {{ Form::bsSubmit('Submit', ['class' => 'btn btn-primary float-right']) }}
                             {!! Form::close() !!}

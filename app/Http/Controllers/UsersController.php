@@ -10,6 +10,11 @@ use App\Http\Requests\CreateUserRequest;
 
 class UsersController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('admin');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -40,19 +45,19 @@ class UsersController extends Controller
      */
     public function store(CreateUserRequest $request)
     {
-        $user = new User;
+        $user = User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'admin' => $request->admin,
+            'password' => Hash::make($request->password)
+        ]);
 
-        $user->name = $request->name;
-        $user->email = $request->email;
-        $user->admin = $request->admin;
-        $user->password = Hash::make($request->password);
-        $user->save();
+        Profile::create([
+            'user_id' => $user->id,
+            'avatar' => 'defaultAvatar.jpeg'
+        ]);
 
-        $profile = new Profile;
-        $profile->user_id = $user->id;
-        $profile->save();
-
-        return redirect()->route('users.index')->with('success', 'New user created');
+        return redirect()->route('users.index')->with('success', 'New user created!');
     }
 
     /**

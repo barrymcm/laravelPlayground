@@ -36,8 +36,8 @@ Route::post('/message/create', 'MessagesController@create');
 // Authentication
 Auth::routes();
 
-Route::get('/view_user', function () {
-    return App\User::find(1)->profile;
+Route::get('/view_user/{id}', function ($id) {
+    return App\User::find($id)->profile;
 });
 
 Route::resource('users', 'UsersController');
