@@ -4,10 +4,15 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
+                @if (Session::has('status'))
+                    <div class="alert alert-{{ Session::get('alert') }}" role="alert">
+                        {{ Session::get('success') }}
+                    </div>
+                @endif
                 <div class="card">
                     <div class="card-header panel-heading">Dashboard
                         <span class="float-right">
-                            <a href="/listings/create" class="btn btn-success btn-xs">Add Listing</a>
+                            <a href="{{ route('listings.create') }}" class="btn btn-success btn-xs">Add Listing</a>
                         </span>
                     </div>
 
@@ -27,8 +32,9 @@
                                         <td>{{ $listing->email }}</td>
                                         <td><a href="/listings/{{$listing->id}}/edit" class="btn btn-primary">Edit</a></td>
                                         <td>
-                                            {!! Form::open(['route' => ["listings.destroy", $listing->id], 'onsubmit' => 'Are you sure?']) !!}
+                                            {!! Form::open(['route' => ["dashboard.trash", $listing->id], 'onsubmit' => 'Are you sure?']) !!}
                                                 {{ Form::hidden('_method', 'DELETE') }}
+                                                {{ Form::hidden('id', $listing->id) }}
                                                 {{ Form::bsSubmit('Delete', ['class' => 'btn btn-danger float-right']) }}
                                             {!! Form::close() !!}
                                         </td>

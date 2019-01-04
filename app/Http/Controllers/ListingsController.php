@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Listing;
 use Illuminate\Database\QueryException;
 use Illuminate\Foundation\Auth\User;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
 
 class ListingsController extends Controller
@@ -21,6 +22,7 @@ class ListingsController extends Controller
      */
     public function index()
     {
+        auth()->user()->id;
         $listings = Listing::all();
 
         return view('listings.index', ['listings' => $listings]);
@@ -60,7 +62,7 @@ class ListingsController extends Controller
 
         $listing->save();
 
-        return redirect('/dashboard')->with('success', 'Listing Added');
+        return redirect()->route('dashboard.index')->with('success', 'Listing Added');
     }
 
     /**
@@ -98,6 +100,9 @@ class ListingsController extends Controller
      */
     public function update(Request $request, $id)
     {
+        Session::flash('status', 'This is a test session message');
+        Session::flash('alert', 'success');
+
         $listing = Listing::find($id);
 
         $listing->name = $request->get('name');
@@ -110,7 +115,7 @@ class ListingsController extends Controller
 
         $listing->save();
 
-        return redirect('/dashboard')->with('success', 'Listing Updated');
+        return redirect()->route('dashboard.index');
     }
 
     /**
@@ -123,10 +128,10 @@ class ListingsController extends Controller
     {
         try {
             Listing::destroy($id);
-            return redirect('/dashboard')->with('success', 'Listing was deleted');
+            return redirect()-route('dashboard')->with('success', 'Listing was deleted');
         } catch (QueryException $e) {
             $e->getMessage();
-            return redirect('/dashboard')->with('failed', 'Listing was not deleted');
+            return redirect()->route('dashboard')->with('failed', 'Listing was not deleted');
         }
 
     }

@@ -21,3 +21,15 @@ $factory->define(App\User::class, function (Faker $faker) {
         'remember_token' => str_random(10),
     ];
 });
+
+$factory->define(App\Listing::class, function (Faker $faker) {
+    return [
+        'user_id' => $faker->numberBetween(2, 20),
+        'name' => $faker->company,
+        'email' => $faker->email,
+        'website' => $faker->domainName,
+        'phone' => $faker->phoneNumber,
+        'address' => $faker->address,
+        'bio' => $faker->bs
+    ];
+});

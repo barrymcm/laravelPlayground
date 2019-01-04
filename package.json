@@ -18,5 +18,11 @@
         "lodash": "^4.17.5",
         "popper.js": "^1.12",
         "vue": "^2.5.7"
+    },
+    "dependencies": {
+        "ajv": "^6.6.2",
+        "ajv-keywords": "^3.2.0",
+        "imagemin": "^6.0.0",
+        "toastr": "^2.1.4"
     }
 }

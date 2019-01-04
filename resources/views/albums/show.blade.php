@@ -9,11 +9,13 @@
         <table class="table table-striped">
             <tr>
                 <th scope="col">{{ $album->name }}</th>
+                @if(Auth::user('create', $album))
+                    <th>
+                        <a class="btn btn-primary float-right" href="{{ route('photos.create', $album->id) }}">Upload Photo</a>
+                    </th>
+                @endif
                 <th>
-                    <a class="btn btn-primary float-right" href="/photos/create/{{ $album->id }}">Upload Photo</a>
-                </th>
-                <th>
-                    <a class="btn btn-outline-secondary float-right" href="/albums">back</a>
+                    <a class="btn btn-outline-secondary float-right" href="{{ route('albums.index') }}">back</a>
                 </th>
             </tr>
             @foreach($album->photos as $photo)

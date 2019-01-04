@@ -29,14 +29,33 @@ Route::get('/contact', function () {
 
 Route::get('/index', 'PracticeController@indexAction');
 
+// Messages
 Route::get('/messages', 'MessagesController@read');
 Route::post('/message/create', 'MessagesController@create');
 
+// Authentication
 Auth::routes();
 
-Route::get('/dashboard', 'DashboardController@index');
-Route::resource('listings', 'ListingsController');
+Route::get('/view_user', function () {
+    return App\User::find(1)->profile;
+});
 
+Route::resource('users', 'UsersController');
+
+//Listings
+Route::resource('listings', 'ListingsController');
+Route::delete('/dashboard/{id}', 'DashboardController@trash')->name('dashboard.trash');
+Route::get('/dashboard', 'DashboardController@index')->name('dashboard.index');
+
+// Photo Album
 Route::resource('albums', 'AlbumsController');
-Route::resource('photos', 'PhotosController');
-Route::get('/photos/create/{id}', 'PhotosController@create');
+Route::resource('photos', 'PhotosController')->except(['create']);
+Route::get('/photos/create/{id}', 'PhotosController@create')->name('photos.create');
+
+// Blog
+Route::group(['prefix' => 'blog'], function () {
+    Route::resource('categories', 'CategoriesController');
+    Route::resource('posts', 'PostsController')->except(['create']);
+    Route::get('/posts/create/{category_id}', 'PostsController@create')->name('posts.create');
+});
+

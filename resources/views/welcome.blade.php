@@ -66,7 +66,7 @@
     </head>
     <body>
         <div class="flex-center position-ref full-height">
-            @if (Route::has('login'))
+            @if(Route::has('login'))
                 <div class="top-right links">
                     @auth
                         <a href="{{ url('/home') }}">Home</a>
@@ -86,6 +86,8 @@
                     <a href="https://laravel.com/docs">Documentation</a>
                     <a href="http://localhost:8000/listings">Listings</a>
                     <a href="http://localhost:8000/albums">Albums</a>
+                    <a href="http://localhost:8000/blog/categories">Blog</a>
+                    <a href="http://localhost:8000/users">Users</a>
                     <a href="https://laravel-news.com">News</a>
                     <a href="https://nova.laravel.com">Nova</a>
                     <a href="https://forge.laravel.com">Forge</a>

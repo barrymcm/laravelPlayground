@@ -5,14 +5,12 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Listing extends Model
+class Post extends Model
 {
     use SoftDeletes;
 
-    protected $dates = ['deleted_at'];
-
-    public function user()
+    public function categories()
     {
-        return $this->belongsTo('App\User');
+        return $this->belongsTo('App\Category');
     }
 }

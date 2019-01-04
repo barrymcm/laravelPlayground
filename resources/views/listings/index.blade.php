@@ -5,7 +5,11 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header panel-heading">Dashboard</div>
+                    <div class="card-header panel-heading">
+                        @if(Auth::id())
+                            <a href="{{ route('dashboard.index') }}" class="btn btn-primary float-right">Dashboard</a>
+                        @endif
+                    </div>
                     <div class="card-body">
                         <h3>Listings</h3>
                         @if(count($listings) > 0)

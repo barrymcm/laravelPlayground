@@ -24,7 +24,6 @@
                              alt="{{ $photo->title }}">
                     </td>
                 </tr>
-
         </table>
     </div>
 @endsection()

@@ -3,13 +3,10 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Listing extends Model
+class Profile extends Model
 {
-    use SoftDeletes;
-
-    protected $dates = ['deleted_at'];
+    protected $fillable = ['avatar', 'user_id', 'about', 'facebook', 'youtube'];
 
     public function user()
     {

@@ -6,7 +6,7 @@
             <div class="col-md-8">
                 <div class="card">
                     <div class="card-header">Create a new album
-                        <span class="float-right"><a href="/albums" class="btn btn-outline-secondary">Back</a></span>
+                        <span class="float-right"><a href="{{ route('albums.index') }}" class="btn btn-outline-secondary">Back</a></span>
                     </div>
 
                     <div class="card-body">
@@ -15,7 +15,7 @@
                                 {{ Form::bsText('name', '', ['placeholder' => 'Album Name']) }}
                                 {{ Form::bsTextArea('description', '', ['placeholder' => 'Album Description']) }}
                                 {{ Form::bsFile('cover_image', ['class' => 'btn btn-primary']) }}
-                                {{ Form::bsSubmit('Submit', ['class' => 'btn btn-primary']) }}
+                                {{ Form::bsSubmit('Submit', ['class' => 'btn btn-primary float-right']) }}
                             {!! Form::close() !!}
                         </div>
                     </div>
