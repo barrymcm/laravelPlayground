@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Post;
+use Illuminate\Http\Request;
+use App\Notifications\NewPostCreated;
+use Illuminate\Support\Facades\Notification;
 
 class PostsController extends Controller
 {
-
     public function __construct()
     {
         $this->middleware('auth', ['destroy']);
@@ -46,6 +47,8 @@ class PostsController extends Controller
         $post->category_id = $request->category_id;
         $post->name = $request->name;
         $post->save();
+
+        Notification::route('mail', 'admin@laravel.dev')->notify(new NewPostCreated($post));
 
         return redirect()->route('categories.show', $post->category_id);
     }
