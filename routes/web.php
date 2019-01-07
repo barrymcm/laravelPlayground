@@ -27,6 +27,8 @@ Route::get('/contact', function () {
     return view('contact');
 });
 
+Route::get('{provider}/auth', 'SocialAuthenticationsController@auth')->name('social.auth');
+
 Route::get('/index', 'PracticeController@indexAction');
 
 // Messages

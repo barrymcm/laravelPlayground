@@ -85,6 +85,8 @@
                 <div class="links">
                     <a href="https://laravel.com/docs">Documentation</a>
                     <a href="http://localhost:8000/listings">Listings</a>
+                    <a href="{{ route('social.auth', ['provider' => 'github']) }}">GitHub</a>
+                    <a href="{{ route('social.auth', ['provider' => 'facebook']) }}">Facebook</a>
                     <a href="http://localhost:8000/albums">Albums</a>
                     <a href="http://localhost:8000/blog/categories">Blog</a>
                     <a href="http://localhost:8000/users">Users</a>
