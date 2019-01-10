@@ -23,7 +23,9 @@
                                     <tr>
                                         <td>{{ $listing->name }}</td>
                                         <td>{{ $listing->email }}</td>
-                                        <td><a href="/listings/{{$listing->id}}" class="btn btn-primary">View</a></td>
+                                        <td>
+                                            <a href="{{ route('listings.show', ['listing' => $listing->id]) }}" class="btn btn-primary">View</a>
+                                        </td>
                                     </tr>
                                 @endforeach
                             </table>

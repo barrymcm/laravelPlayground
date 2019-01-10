@@ -13,21 +13,25 @@
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->middleware('auth');
 
 Route::get('/home', function () {
     return view('home');
-});
+})->middleware('auth');
 
 Route::get('/about', function () {
     return view('about');
-});
+})->middleware('auth');
 
 Route::get('/contact', function () {
     return view('contact');
-});
+})->middleware('auth');
 
-Route::get('{provider}/auth', 'SocialAuthenticationsController@auth')->name('social.auth');
+Route::get('login/{provider}', 'SocialLoginController@redirectToProvider')
+    ->name('login.provider');
+
+Route::get('login/{provider}/callback', 'SocialLoginController@handleProviderCallback')
+    ->name('login.callback');
 
 Route::get('/index', 'PracticeController@indexAction');
 

@@ -22,7 +22,6 @@ class ListingsController extends Controller
      */
     public function index()
     {
-        auth()->user()->id;
         $listings = Listing::all();
 
         return view('listings.index', ['listings' => $listings]);

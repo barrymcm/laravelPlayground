@@ -15,7 +15,10 @@
 
     <!-- Fonts -->
     <link href="{{ asset('css/toastr.css') }}" rel="stylesheet"/>
+    <link href="{{ asset('css/bootstrap-social.css') }}" rel="stylesheet"/>
+    <link href="{{ asset('css/all.css') }}" rel="stylesheet"/>
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
 
     <!-- Styles -->
@@ -35,7 +38,6 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
-
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -73,7 +75,6 @@
                 </div>
             </div>
         </nav>
-        
         <main class="py-4">
             @yield('content')
         </main>

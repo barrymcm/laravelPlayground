@@ -6,7 +6,9 @@
             <div class="col-md-8">
                 <div class="card">
                     <div class="card-header">View Listing
-                        <span class="float-right"><a href="/listings" class="btn btn-outline-secondary">Back</a></span>
+                        <span class="float-right">
+                            <a href="{{ route('listings.index') }}" class="btn btn-outline-secondary">Back</a>
+                        </span>
                     </div>
                     <div class="card-body">
                         <div class="panel-body">
