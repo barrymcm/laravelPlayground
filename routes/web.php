@@ -30,7 +30,7 @@ Route::get('/contact', function () {
 Route::get('login/{provider}', 'SocialLoginController@redirectToProvider')
     ->name('login.provider');
 
-Route::get('login/{provider}/callback', 'SocialLoginController@handleProviderCallback')
+Route::get('{provider}/callback', 'SocialLoginController@handleProviderCallback')
     ->name('login.callback');
 
 Route::get('/index', 'PracticeController@indexAction');

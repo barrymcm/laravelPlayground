@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\User;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Laravel\Socialite\Facades\Socialite;
 
@@ -16,9 +17,9 @@ class SocialLoginController extends Controller
         return Socialite::driver($provider)->redirect();
     }
 
-    public function handleProviderCallback($provider)
+    public function handleProviderCallback(Request $request, $provider)
     {
-        $userSocial = Socialite::driver($provider)->user();
+        $userSocial = Socialite::driver($provider)->user($request->get('state'));
         $user = User::where(['email' => $userSocial->getEmail()])->first();
 
         if (!$user) {
@@ -28,7 +29,7 @@ class SocialLoginController extends Controller
             ]);
         }
 
-        Auth::login($user);
+        Auth::login($user, true);
 
         return view('home', ['userSocial' => $userSocial]);
     }

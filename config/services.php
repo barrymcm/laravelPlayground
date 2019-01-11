@@ -38,7 +38,7 @@ return [
     'github' => [
         'client_id' => env('GITHUB_CLIENT_ID'),
         'client_secret' => env('GITHUB_CLIENT_SECRET'),
-        'redirect' => 'http://laravel-playground.com:8000/login/github/callback',
+        'redirect' => 'http://laravel-playground.com:8000/github/callback',
     ],
 
     'facebook' => [
