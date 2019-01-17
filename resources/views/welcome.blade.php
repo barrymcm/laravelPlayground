@@ -83,8 +83,7 @@
                 </div>
 
                 <div class="links">
-                    <a href="{{ route('login.provider', ['provider' => 'github']) }}">GitHub</a>
-                    <a href="{{ route('login.provider', ['provider' => 'facebook']) }}">Facebook</a>
+                    <a href="{{ route('social_login') }}">Login with GitHub</a>
                 </div>
             </div>
         </div>

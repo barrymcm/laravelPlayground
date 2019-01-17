@@ -2,35 +2,30 @@
 
 namespace App\Http\Controllers;
 
-use App\User;
+use App\Services\SocialAuthenticationService;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Laravel\Socialite\Facades\Socialite;
+
 
 class SocialLoginController extends Controller
 {
     use AuthenticatesUsers;
 
-    public function redirectToProvider($provider)
+    public function login(SocialAuthenticationService $socialAuth, Request $request)
     {
-        return Socialite::driver($provider)->redirect();
+        return $socialAuth->login($request->has('code'));
     }
 
-    public function handleProviderCallback(Request $request, $provider)
+    public function handleCallback(SocialAuthenticationService $socialAuth)
     {
-        $userSocial = Socialite::driver($provider)->user($request->get('state'));
-        $user = User::where(['email' => $userSocial->getEmail()])->first();
+        $user = $socialAuth->handleCallback();
 
-        if (!$user) {
-            return view('auth.register', [
-                'name' => $userSocial->getName(),
-                'email' => $userSocial->getEmail()
-            ]);
+        if (Auth::check($user)) {
+            return view('home');
         }
 
-        Auth::login($user, true);
+        return redirect('auth.register', $user);
 
-        return view('home', ['userSocial' => $userSocial]);
     }
 }

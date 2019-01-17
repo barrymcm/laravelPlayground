@@ -13,11 +13,11 @@
 
 Route::get('/', function () {
     return view('welcome');
-})->middleware('auth');
+})->name('welcome');
 
 Route::get('/home', function () {
     return view('home');
-})->middleware('auth');
+})->name('home')->middleware('auth');
 
 Route::get('/about', function () {
     return view('about');
@@ -27,11 +27,8 @@ Route::get('/contact', function () {
     return view('contact');
 })->middleware('auth');
 
-Route::get('login/{provider}', 'SocialLoginController@redirectToProvider')
-    ->name('login.provider');
-
-Route::get('{provider}/callback', 'SocialLoginController@handleProviderCallback')
-    ->name('login.callback');
+Route::get('/social/login', 'SocialLoginController@login')->name('social_login');
+Route::get('/provider/callback', 'SocialLoginController@handleCallback')->name('provider_callback');
 
 Route::get('/index', 'PracticeController@indexAction');
 

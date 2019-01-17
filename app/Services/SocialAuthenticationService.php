@@ -3,22 +3,54 @@
 
 namespace App\Services;
 
-use App\User;
+use App\Repository\UserRepository;
 use Illuminate\Support\Facades\Auth;
 use Laravel\Socialite\Facades\Socialite;
 
 class SocialAuthenticationService
 {
-    public function executeLogin($hasCode, $provider)
+    /**
+     * @var UserRepository
+     */
+    private $userRepository;
+    private $provider;
+    private $user;
+
+    public function __construct(UserRepository $userRepository)
+    {
+        $this->userRepository = $userRepository;
+        $this->provider = 'github';
+    }
+
+    public function login($hasCode)
     {
         if (!$hasCode) {
-            $this->redirectToProvider($provider);
-            $this->handleProviderCallback($provider);
+            return Socialite::driver($this->provider)->redirect();
         }
     }
 
-    public function redirectToProvider($provider)
+    public function handleCallback()
     {
-        return Socialite::driver($provider)->redirect();
+        $user = Socialite::driver($this->provider)->stateless()->user();
+
+        if (isset($user)) {
+            $user = $this->tryGetUser($user);
+        }
+
+        if (isset($user)) {
+            $this->handleUserLogin($user);
+        } else {
+            return $user;
+        }
+    }
+
+    private function tryGetUser($user)
+    {
+        return $this->userRepository->getUserByEmail($user->getEmail());
+    }
+
+    private function handleUserLogin($user)
+    {
+        Auth::login($user,  true);
     }
 }
