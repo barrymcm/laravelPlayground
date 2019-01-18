@@ -17,8 +17,9 @@ class SocialLoginController extends Controller
         return $socialAuth->login($request->has('code'));
     }
 
-    public function handleCallback(SocialAuthenticationService $socialAuth)
+    public function handleCallback(SocialAuthenticationService $socialAuth, Request $request)
     {
+        session()->put('state', $request->get('state'));
         $user = $socialAuth->handleCallback();
 
         if (Auth::check($user)) {
@@ -26,6 +27,5 @@ class SocialLoginController extends Controller
         }
 
         return redirect('auth.register', $user);
-
     }
 }

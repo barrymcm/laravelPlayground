@@ -44,5 +44,4 @@ return [
     'facebook' => [
         'client_id' => ''
     ]
-
 ];

@@ -21,7 +21,7 @@ return [
         'github' => [
             'client_id' => '0308fef1e63d6f3a7091',
             'client_secret' => 'dd3c0e66d0531907b77335bfad77a4b18423c967',
-            'redirect_uri' => 'http://laravel-playground.com:8000/github/redirect',
+            'redirect_uri' => 'http://laravel-playground.com/github/redirect',
             'scope' => [],
         ],
         'linkedin' => [

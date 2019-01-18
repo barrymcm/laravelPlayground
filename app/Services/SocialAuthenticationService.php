@@ -14,7 +14,6 @@ class SocialAuthenticationService
      */
     private $userRepository;
     private $provider;
-    private $user;
 
     public function __construct(UserRepository $userRepository)
     {
@@ -31,7 +30,7 @@ class SocialAuthenticationService
 
     public function handleCallback()
     {
-        $user = Socialite::driver($this->provider)->stateless()->user();
+        $user = Socialite::driver($this->provider)->user();
 
         if (isset($user)) {
             $user = $this->tryGetUser($user);
